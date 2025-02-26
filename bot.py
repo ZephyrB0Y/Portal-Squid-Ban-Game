@@ -1,5 +1,19 @@
+import os
+from dotenv import load_dotenv  # Aggiungi questa linea per caricare il file .env
 import discord
 from discord.ext import commands
+
+# Carica il file .env
+load_dotenv()
+
+# Recupera il token dal file .env
+TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+
+# Verifica se il token è stato caricato correttamente
+if not TOKEN:
+    print("Errore: Il token non è stato caricato correttamente.")
+else:
+    print("Token caricato con successo.")
 
 # Set intents
 intents = discord.Intents.default()
@@ -83,5 +97,5 @@ async def ban(ctx, member: discord.Member):
     else:
         await ctx.send(f"⚠️ You can only ban users with the **{GAMER_ROLE_NAME}** role!")
 
-import os
-bot.run(os.getenv("DISCORD_BOT_TOKEN"))
+# Run the bot with the loaded token
+bot.run(TOKEN)
